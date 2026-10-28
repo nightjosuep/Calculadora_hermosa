@@ -95,8 +95,11 @@
 						return Math.sin((argument * Math.PI) / 180);
 					case 'cos':
 						return Math.cos((argument * Math.PI) / 180);
-					case 'tan':
-						return Math.tan((argument * Math.PI) / 180);
+					case 'tan': {
+						const radians = (argument * Math.PI) / 180;
+						if (Math.abs(Math.cos(radians)) < Number.EPSILON * 8) return NaN;
+						return Math.tan(radians);
+					}
 					case 'sqrt':
 						return Math.sqrt(argument);
 					case 'log':

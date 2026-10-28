@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native';
+import { View, StyleSheet, useWindowDimensions } from 'react-native';
 import { CalculatorButton } from './CalculatorButton';
 import { Colors } from '../constants/Colors';
 
@@ -57,23 +57,31 @@ const rows: ButtonDefinition[][] = [
   ],
 ];
 
-export const CalculatorGrid = ({ onPress }: Props) => (
-  <View style={styles.container}>
-    {rows.map((row, rowIndex) => (
-      <View key={rowIndex} style={styles.row}>
-        {row.map((button) => (
-          <CalculatorButton
-            key={button.label}
-            label={button.label}
-            color={button.color}
-            doubleSize={button.doubleSize}
-            onPress={() => onPress(button.value)}
-          />
-        ))}
-      </View>
-    ))}
-  </View>
-);
+export const CalculatorGrid = ({ onPress }: Props) => {
+  const { width, height } = useWindowDimensions();
+  const buttonWidth = (width - 40 - styles.row.gap * 3) / 4;
+  const buttonHeight = (height - 264) / rows.length;
+  const buttonSize = Math.min(80, buttonWidth, Math.max(36, buttonHeight));
+
+  return (
+    <View style={styles.container}>
+      {rows.map((row, rowIndex) => (
+        <View key={rowIndex} style={styles.row}>
+          {row.map((button) => (
+            <CalculatorButton
+              key={button.label}
+              label={button.label}
+              color={button.color}
+              doubleSize={button.doubleSize}
+              size={buttonSize}
+              onPress={() => onPress(button.value)}
+            />
+          ))}
+        </View>
+      ))}
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -81,7 +89,7 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: 10,
+    gap: 8,
+    marginBottom: 6,
   },
 });
