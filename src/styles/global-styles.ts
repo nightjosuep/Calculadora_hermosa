@@ -29,7 +29,7 @@ export const globalStyles = StyleSheet.create({
 
   
   mainResult: {
-    color: Colors.displayBackground,
+    color: Colors.displayText,
     fontSize: 60,
     textAlign: 'right',
     fontFamily: 'blackOpsOne',
@@ -37,11 +37,10 @@ export const globalStyles = StyleSheet.create({
 
   
   subResult: {
-    color: Colors.buttonFunction,
+    color: Colors.displayText,
     fontSize: 25,
     textAlign: 'right',
     fontFamily: 'blackOpsOne',
-    opacity: 0.7, 
     marginBottom: 5,
   },
 });

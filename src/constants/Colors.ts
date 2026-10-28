@@ -9,4 +9,5 @@ export const Colors = {
   buttonFunction: '#8C8681',   
   // Texto de los botones
   buttonText: '#1F1F21',       
+  displayText: '#000000',
 };
